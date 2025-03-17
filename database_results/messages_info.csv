@@ -1,0 +1,13 @@
+Table Name,messages
+
+Schema Information
+Column Name,Type,Not Null,Default Value,Primary Key
+message_id,TEXT,NO,,YES
+chat_id,TEXT,NO,,NO
+role,TEXT,NO,,NO
+content,TEXT,NO,,NO
+timestamp,DATETIME,NO,,NO
+
+First Record
+message_id,chat_id,role,content,timestamp
+e5a7f543-586c-4891-abe7-bf36567f685f,2d17880b-929b-4bc8-925d-30287a5798a3,user,what is LangChain?,2025-02-11 20:44:07

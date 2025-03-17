@@ -1,0 +1,13 @@
+Table Name,users
+
+Schema Information
+Column Name,Type,Not Null,Default Value,Primary Key
+user_id,TEXT,NO,,YES
+name,TEXT,NO,,NO
+email,TEXT,NO,,NO
+password_hash,TEXT,NO,,NO
+created_at,DATETIME,NO,,NO
+
+First Record
+user_id,name,email,password_hash,created_at
+f2a80f37-95b9-4598-8b0c-b17ea7c386ee,Felipe Oliveira,fc1702@gmail.com,$2b$12$zbRV7Md.IC0DBcGXzoOEgeZYEuJ0fz98yEr76jm.zE4mMi.39qgnW,2025-01-17 03:35:30

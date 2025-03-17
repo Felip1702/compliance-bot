@@ -1,0 +1,12 @@
+Table Name,chats
+
+Schema Information
+Column Name,Type,Not Null,Default Value,Primary Key
+chat_id,TEXT,NO,,YES
+user_id,TEXT,NO,,NO
+pdf_name,TEXT,NO,,NO
+created_at,DATETIME,NO,,NO
+
+First Record
+chat_id,user_id,pdf_name,created_at
+2d17880b-929b-4bc8-925d-30287a5798a3,f2a80f37-95b9-4598-8b0c-b17ea7c386ee,,2025-02-11 20:43:08

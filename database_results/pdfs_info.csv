@@ -1,0 +1,13 @@
+Table Name,pdfs
+
+Schema Information
+Column Name,Type,Not Null,Default Value,Primary Key
+pdf_id,TEXT,NO,,YES
+chat_id,TEXT,NO,,NO
+pdf_name,TEXT,NO,,NO
+text_chunks,TEXT,NO,,NO
+embeddings,BLOB,NO,,NO
+
+First Record
+pdf_id,chat_id,pdf_name,text_chunks,embeddings
+Table is Empty

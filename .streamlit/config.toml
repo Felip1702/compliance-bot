@@ -1,0 +1,10 @@
+[theme]
+base="light"
+
+# Cores adicionais (opcional)
+widgetBackgroundColor = "#ffffff"
+widgetBorderColor = "#e1e1e1"
+widgetTextColor = "#2c3e50"
+
+
+

@@ -1,0 +1,14 @@
+Table Name,documents
+
+Schema Information
+Column Name,Type,Not Null,Default Value,Primary Key
+document_id,TEXT,NO,,YES
+user_id,TEXT,YES,,NO
+pdf_name,TEXT,YES,,NO
+pdf_size,INTEGER,YES,,NO
+upload_date,TEXT,YES,,NO
+region,TEXT,NO,NULL,NO
+
+First Record
+document_id,user_id,pdf_name,pdf_size,upload_date,region
+Table is Empty
