@@ -7,14 +7,14 @@ from dotenv import load_dotenv
 import hashlib
 import logging
 from langchain_core.documents import Document
+import streamlit as st
+
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
 # Configurar a chave da API da OpenAI
-openai_api_key = os.getenv("OPENAI_API_KEY")
-if not openai_api_key:
-    raise ValueError("A chave da API da OpenAI não foi configurada no arquivo .env.")
+openai_api_key = st.secrets["OPENAI_API_KEY"]
 
 # Caminho fixo para a pasta de embeddings
 EMBEDDINGS_DIR = os.path.abspath("./embeddings_store")
