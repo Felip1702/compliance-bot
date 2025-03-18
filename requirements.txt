@@ -8,3 +8,4 @@ bcrypt
 streamlit-option-menu
 plotly
 pandas
+langchain-openai
