@@ -10,3 +10,4 @@ plotly
 pandas
 langchain-openai
 langchain-community
+langgraph
