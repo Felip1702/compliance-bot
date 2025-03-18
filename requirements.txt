@@ -4,7 +4,6 @@ langchain
 openai
 python-dotenv
 faiss-cpu
-sqlite3
 bcrypt
 streamlit-option-menu
 plotly
