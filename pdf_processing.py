@@ -6,15 +6,14 @@ from langchain_community.vectorstores import FAISS
 from dotenv import load_dotenv
 import hashlib
 import logging
-from langchain_core.documents import Document
-import streamlit as st
-
 
 # Carregar variáveis de ambiente
 load_dotenv()
 
 # Configurar a chave da API da OpenAI
-openai_api_key = st.secrets["OPENAI_API_KEY"]
+openai_api_key = os.getenv("OPENAI_API_KEY")
+if not openai_api_key:
+    raise ValueError("A chave da API da OpenAI não foi configurada no arquivo .env.")
 
 # Caminho fixo para a pasta de embeddings
 EMBEDDINGS_DIR = os.path.abspath("./embeddings_store")
@@ -23,7 +22,7 @@ EMBEDDINGS_DIR = os.path.abspath("./embeddings_store")
 REGIONS = ["South America", "Europe", "Asia", "North America"]
 for region in REGIONS:
     region_path = os.path.join(EMBEDDINGS_DIR, region)
-    os.makedirs(region_path, exist_ok=True)  # Cria a pasta se não existir
+    os.makedirs(region_path, exist_ok=True) # Ensure region folder exists.
 
 def process_pdf(pdf, chat_id, region):
     logging.basicConfig(level=logging.INFO)
@@ -33,9 +32,7 @@ def process_pdf(pdf, chat_id, region):
     try:
         pdf_reader = PdfReader(pdf)
         text = ""
-        page_number = 0 # Add to make it better
         for page in pdf_reader.pages:
-            page_number += 1 # Add to make it better
             text += page.extract_text()
     except Exception as e:
         logging.error(f"Error extracting text from PDF: {e}")
@@ -48,30 +45,18 @@ def process_pdf(pdf, chat_id, region):
     )
     chunks = text_splitter.split_text(text=text)
 
-    # Get filename of the file
-    pdf_name = pdf.name
-
-    # Create a list of Documents from the chunks
-    documents = []
-    chunk_number = 0
-    for chunk in chunks:
-        chunk_number += 1 # Add to make it better
-        metadata = {"pdf_name": pdf_name,
-                    "page_number": page_number, # Add to make it better
-                    "chunk_number": chunk_number # Add to make it better
-                    }
-        doc = Document(page_content=chunk, metadata=metadata)
-        documents.append(doc)
-
     # Gerar nome único para o armazenamento
     pdf_id = hashlib.md5(f"{pdf.name}_{chat_id}".encode()).hexdigest()
-    save_path = os.path.join(EMBEDDINGS_DIR, region, f"{pdf_id}_faiss_index")  # Corrected path
+
+    # Determine the save path based on the region
+    region_path = os.path.join(EMBEDDINGS_DIR, region)  # Get the correct region folder
+    save_path = os.path.join(region_path, f"{pdf_id}_faiss_index")
 
     # Gerar embeddings
     vectorstore = None
     try:
         embeddings = OpenAIEmbeddings(openai_api_key=os.getenv("OPENAI_API_KEY"))
-        vectorstore = FAISS.from_documents(documents, embedding=embeddings)
+        vectorstore = FAISS.from_texts(chunks, embedding=embeddings)
         vectorstore.save_local(save_path)
         logging.info(f"Embeddings saved successfully for PDF ID: {pdf_id} to: {save_path}")
     except Exception as e:
